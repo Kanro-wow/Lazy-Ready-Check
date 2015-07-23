@@ -3,7 +3,7 @@ local green = string.format("|cff%02x%02x%02x",124,252,0).."LazyReadyCheck: |r"
 
 f:SetScript("OnEvent", function(self,event,...)
 	local time = math.random(1,4)
-	print("Accepting in",time)
+	print(green.."Accepting in",time,"seconds")
 	C_Timer.After(time, function() ReadyCheckFrameYesButton:Click() end)
 end)
 

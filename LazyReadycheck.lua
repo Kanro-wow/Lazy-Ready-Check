@@ -10,7 +10,7 @@ end)
 SLASH_LAZYREADYCHECK1 = "/lrc"
 SLASH_LAZYREADYCHECK2 = "/lazyreadycheck"
 SlashCmdList["LAZYREADYCHECK"] = function(msg, editbox)
-	if msg == "auto" then
+	if msg == "enable" then
 		f:RegisterEvent("READY_CHECK")
 		print(green.."Registered event, will accept readychecks")
 		ReadyCheckFrameYesButton:Click()

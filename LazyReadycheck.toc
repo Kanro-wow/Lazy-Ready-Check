@@ -2,5 +2,6 @@
 ## Title : LazyReadycheck
 ## Notes: Will autoaccept readychecks after enabled
 ## Author: Kanro
-## Version: 1.0
+## Version: 1.1.0
+## SavedVariables: LazyReadyCheck
 LazyReadycheck.lua

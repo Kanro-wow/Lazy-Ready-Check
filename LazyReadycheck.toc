@@ -4,4 +4,5 @@
 ## Author: Kanro
 ## Version: 1.1.0
 ## SavedVariables: LazyReadyCheck
+localization.lua
 LazyReadycheck.lua

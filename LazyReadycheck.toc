@@ -1,8 +1,16 @@
 ## Interface: 60200
-## Title : LazyReadycheck
-## Notes: Will autoaccept readychecks after enabled
+## Title : |cffFFA500LazyReadyCheck:|r
 ## Author: Kanro
 ## Version: 1.1.0
 ## SavedVariables: LazyReadyCheck
+## Notes: Will autoaccept readychecks after enabled
+## Notes-zhCN: Will autoaccept readychecks after enabled
+## Notes-ruRU: Will autoaccept readychecks after enabled
+## Notes-zhTW: Will autoaccept readychecks after enabled
+## Notes-koKR: Will autoaccept readychecks after enabled
+## Notes-esES: Will autoaccept readychecks after enabled
+## Notes-esMX: Will autoaccept readychecks after enabled
+## Notes-frFR: Will autoaccept readychecks after enabled
 localization.lua
 LazyReadycheck.lua
+

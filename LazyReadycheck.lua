@@ -1,43 +1,37 @@
-if LazyReadyCheck == nil then LazyReadyCheck = { ["login"] = false, } end
-local strings = {
-	["on"] = [[Turned |cff33CC33on|r! Will accept ready checks.]],
-	["off"] = [[Turned |cffFF0000off|r! Will ignore ready checks.]],
-	["options"] = [[Type /LRC for options]],
-	["lrc"] = [[|cffFFA500LazyReadyCheck:|r]],
-	["logon"] = [[|cff33CC33Turned on after login!|r! When logging in, addon will accept ready checks!]],
-	["logoff"] = [[|cffFF0000Turned off after login|r! When logging in, addon will ignore ready checks!]],
-	["onOff"] = [[/LRC on/off - autoaccept or ignore ready checks]],
-	["onOffLogin"] = [[/LRC login on/off- turn on Lazy Ready Check when logging in]],
-}
+if LazyReadyCheck == nil then LazyReadyCheck = { ["enabled"] = false, } end
+local lrc = [[|cffFFA500LazyReadyCheck:|r]]
+
+local L = select(2, ...)
 
 SLASH_LAZYREADYCHECK1 = "/lrc"
 SLASH_LAZYREADYCHECK2 = "/lazyreadycheck"
 SlashCmdList["LAZYREADYCHECK"] = function(msg, editbox)
-	local arg= {}
-	for word in msg:gmatch("%w+") do table.insert(arg, word) end
-	if arg[1] == "on" or arg[1] == "off" then
-		print(strings["lrc"],strings[arg[1]])
-		ReadyCheckFrameYesButton:SetText(READY)
+	local _msg = string.lower(msg)
+	if _msg == L["on"] or _msg == L["enable"] then
+		print(lrc,L["Turned ON! Will accept ready checks."])
 		ReadyCheckFrameYesButton.elapsed = math.random(10,50)/10
-		enabled = (arg[1] == "on" and true or false)
-	elseif arg[1] == "login" and (arg[2] == "off" or arg[2] == "on") then
-		LazyReadyCheck.login = (arg[2] == "on" and true or false)
-		print(strings["lrc"],(arg[2] == "on" and strings["logon"] or strings["logoff"]))
+		LazyReadyCheck.enabled = true
+	elseif _msg == L["off"] or _msg == L["disable"] then
+		print(lrc,L["Turned OFF! Will ignore ready checks."])
+		ReadyCheckFrameYesButton:SetText(READY)
+		LazyReadyCheck.enabled = false
 	else
-		print(strings["lrc"],strings["onOff"])
-		print(strings["lrc"],strings["onOffLogin"])
+		print(lrc,L["/LRC on/off - autoaccept or ignore ready checks."])
 	end
 end
 
 local f = CreateFrame("Frame")
 f:RegisterEvent("PLAYER_LOGIN")
 f:SetScript("OnEvent", function(self,event,...)
-	local enabled = LazyReadyCheck.login
-	print(strings["lrc"],strings["options"])
+	if LazyReadyCheck.enabled then
+		print(lrc,L["Type /LRC for options. Currently turned on!"])
+	else
+		print(lrc,L["Type /LRC for options. Currently turned off!"])
+	end
 end)
 
 ReadyCheckFrameYesButton:HookScript("OnUpdate",function(self,elapsed)
-	if enabled then
+	if LazyReadyCheck.enabled then
 		self.elapsed = self.elapsed - elapsed
 		self:SetFormattedText('%s |cffffffff(%.1f)|r', READY, self.elapsed)
 		if(self.elapsed <= 0) then
@@ -50,4 +44,3 @@ end)
 ReadyCheckFrameYesButton:HookScript("OnShow", function(self)
 	self.elapsed = math.random(10,50)/10
 end)
-
